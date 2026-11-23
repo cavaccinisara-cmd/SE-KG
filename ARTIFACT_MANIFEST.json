@@ -1,0 +1,86 @@
+{
+  "status": "prepublication_candidate",
+  "public_release_authorized": false,
+  "files": [
+    {
+      "path": "ontology/sekg_ontology.ttl",
+      "sha256": "97df1a7df5975c033dda4a8d6828ffd5804bdae7675e4a9888afce385236d977",
+      "bytes": 37615
+    },
+    {
+      "path": "validation/reports/CQ07_DETERMINISTIC_CORRECTION.json",
+      "sha256": "af8e5c315e5515b05ab4e167d9dc10d9c6b79894a3b17a49f4897d5e91abbe96",
+      "bytes": 818
+    },
+    {
+      "path": "validation/reports/SHACL_ADVANCED_REPORT.ttl",
+      "sha256": "4a53a3befd9bcdb7273ef3d6e47a83be519927771faee49ef0d2a44ee23be2be",
+      "bytes": 147
+    },
+    {
+      "path": "validation/reports/SHACL_PUBLIC_CANDIDATE_SUMMARY.json",
+      "sha256": "dedd85c04a3e5685ddeda3ebee7ec56def7a2a5b3c4f0039eaa08e7d89524367",
+      "bytes": 690
+    },
+    {
+      "path": "validation/reports/SHACL_STRUCTURAL_REPORT.ttl",
+      "sha256": "4a53a3befd9bcdb7273ef3d6e47a83be519927771faee49ef0d2a44ee23be2be",
+      "bytes": 147
+    },
+    {
+      "path": "validation/reports/SPARQL_REGRESSION_SUMMARY.json",
+      "sha256": "4642d6b169cbaaaed63bbec9b213685f777a8ab8f82f23d6c9e445d277c89c98",
+      "bytes": 2221
+    },
+    {
+      "path": "validation/shacl/sekg_evidence_provenance_shapes.ttl",
+      "sha256": "1a99f467e51b0467b68cdab15cb19088d61b88214c6c0c560249078c9a50c158",
+      "bytes": 3860
+    },
+    {
+      "path": "validation/shacl/sekg_shapes.ttl",
+      "sha256": "07c1d6be63ac555d6d2efd32bf34282ed577e97df747fef297fa5bb53cc011a4",
+      "bytes": 3840
+    },
+    {
+      "path": "validation/sparql/CQ01_topic_inventory.rq",
+      "sha256": "93fa72608b61f3c0b30360895376e7a03bd9ee6c26ed07d914ab95b66551ab23",
+      "bytes": 433
+    },
+    {
+      "path": "validation/sparql/CQ02_association_summary.rq",
+      "sha256": "fbe91f7eb2f0871fc16f0f875046c20af0d122838596b4d4b4eefa62ed969583",
+      "bytes": 441
+    },
+    {
+      "path": "validation/sparql/CQ03_grounding_types.rq",
+      "sha256": "63b524558965cf4fcdbf404da875a8bf076db9f10ad3421c57b8ce1608efc78e",
+      "bytes": 403
+    },
+    {
+      "path": "validation/sparql/CQ04_evidence_trace_topic5.rq",
+      "sha256": "d168705ec2916008d98517fbf1f4b6f8195b08efe0488dc44f23ebf4b09a35e8",
+      "bytes": 704
+    },
+    {
+      "path": "validation/sparql/CQ05_expert_vs_cohesion.rq",
+      "sha256": "0c2cffe4d8d93476c72878efc8da376dc85ff75f9881afacaeb1a10ca3951b80",
+      "bytes": 672
+    },
+    {
+      "path": "validation/sparql/CQ06_candidate_review.rq",
+      "sha256": "6f428baeaf06304f4bfac9b08f658a058c9548294cb2f242bac1599b64a9c8bf",
+      "bytes": 556
+    },
+    {
+      "path": "validation/sparql/CQ07_multi_position.rq",
+      "sha256": "040371589af9a7b16ec4584b198816d42533ade45947179a1e2c59907b53164e",
+      "bytes": 466
+    },
+    {
+      "path": "validation/sparql/CQ08_human_ratings.rq",
+      "sha256": "2e95acecc85bd045fa8563fe9f473dc741f5f9a03e44e450826960f6c999408b",
+      "bytes": 477
+    }
+  ]
+}

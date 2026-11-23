@@ -1,0 +1,8 @@
+PREFIX sekg: <https://example.org/sekg/ontology/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX meshv: <http://id.nlm.nih.gov/mesh/vocab#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?descriptor (COUNT(DISTINCT ?tree) AS ?positions) WHERE {
+ ?descriptor sekg:hasTreePosition ?tree. } GROUP BY ?descriptor HAVING(COUNT(DISTINCT ?tree)>1)
+ ORDER BY DESC(?positions) ASC(?descriptor) LIMIT 15

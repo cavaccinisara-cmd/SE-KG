@@ -1,0 +1,113 @@
+@prefix sek: <https://example.org/sekg/ontology/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sek:DiscoveredTopicShape a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:topicId ],
+        [ sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:minInclusive 0 ;
+            sh:path sek:caseCount ],
+        [ sh:class sek:TopicCohesionAssessment ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:hasCohesionAssessment ] ;
+    sh:targetClass sek:DiscoveredTopic .
+
+sek:ExperimentalArtifactShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:artifactFilename ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:artifactRelativePath ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:artifactSHA256 ] ;
+    sh:targetClass sek:ExperimentalArtifact .
+
+sek:HumanCoherenceAssessmentShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:maxInclusive 5 ;
+            sh:minCount 1 ;
+            sh:minInclusive 1 ;
+            sh:path sek:coherenceRating ],
+        [ sh:class sek:HumanEvaluator ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:assessedBy ],
+        [ sh:class sek:BlindAssessmentGroup ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:assessesGroup ] ;
+    sh:targetClass sek:HumanCoherenceAssessment .
+
+sek:MeSHSourceTermShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:sourceTermLabel ] ;
+    sh:targetClass sek:MeSHSourceTerm .
+
+sek:OntologyReviewCandidateShape a sh:NodeShape ;
+    sh:property [ sh:class sek:DiscoveredTopic ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:candidateForTopic ],
+        [ sh:class sek:MeSHSourceTerm ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:candidateSourceTerm ],
+        [ sh:minCount 1 ;
+            sh:path sek:supportedByEvidence ],
+        [ sh:hasValue "pending_human_review"^^xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:reviewStatus ],
+        [ sh:datatype xsd:boolean ;
+            sh:hasValue false ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:automaticAdmission ] ;
+    sh:targetClass sek:OntologyReviewCandidate .
+
+sek:StatisticalAssociationShape a sh:NodeShape ;
+    sh:property [ sh:class sek:MeSHSourceTerm ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:hasSourceTerm ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:hasGrounding ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:maxInclusive 1 ;
+            sh:minCount 1 ;
+            sh:minInclusive 0 ;
+            sh:path sek:pValue ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:maxInclusive 1 ;
+            sh:minCount 1 ;
+            sh:minInclusive 0 ;
+            sh:path sek:qValue ],
+        [ sh:datatype xsd:boolean ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:fdrSignificant ] ;
+    sh:targetClass sek:StatisticalAssociation .
+
+sek:TopicCohesionAssessmentShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:minInclusive 0 ;
+            sh:path sek:conceptPairCount ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:minInclusive 0 ;
+            sh:path sek:sourceTermCount ] ;
+    sh:targetClass sek:TopicCohesionAssessment .
+

@@ -1,0 +1,883 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix meshv: <http://id.nlm.nih.gov/mesh/vocab#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sekg: <https://example.org/sekg/ontology/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/sekg/ontology> a owl:Ontology ;
+    rdfs:label "Semantic Evidence Knowledge Graph Ontology"@en ;
+    dcterms:description "An ontology for provenance-aware representation of statistical, terminological, hierarchical and human evidence supporting topic-guided biomedical knowledge engineering."@en ;
+    owl:priorVersion sekg:0.1.0 ;
+    owl:versionIRI sekg:0.2.0 ;
+    owl:versionInfo "0.2.0" .
+
+sekg:Assessed a owl:NamedIndividual,
+        sekg:EvidenceAvailability ;
+    rdfs:label "Assessed"@en ;
+    skos:definition "Completed human assessments are available."@en .
+
+sekg:DirectDescriptorGrounding a owl:Class ;
+    rdfs:label "Direct descriptor grounding"@en ;
+    rdfs:subClassOf sekg:TerminologicalGrounding ;
+    owl:disjointWith sekg:SCRGrounding ;
+    skos:definition "Resolution through a direct MeSH descriptor match."@en .
+
+sekg:Estimable a owl:NamedIndividual,
+        sekg:EvidenceAvailability ;
+    rdfs:label "Estimable"@en ;
+    skos:definition "Hierarchical cohesion can be estimated."@en .
+
+sekg:FiniteOddsRatio a owl:NamedIndividual,
+        sekg:OddsRatioMeasurementStatus ;
+    owl:differentFrom sekg:PositiveInfiniteOddsRatio,
+        sekg:UndefinedOddsRatio ;
+    skos:definition "The odds ratio has a finite numerical value."@en .
+
+sekg:NoSignificantAssociation a owl:NamedIndividual,
+        sekg:EvidenceAvailability ;
+    rdfs:label "NoSignificantAssociation"@en ;
+    skos:definition "Statistical testing produced no significant association."@en .
+
+sekg:NotAssessed a owl:NamedIndividual,
+        sekg:EvidenceAvailability ;
+    rdfs:label "NotAssessed"@en ;
+    skos:definition "No completed human assessments are available."@en .
+
+sekg:NotEstimable a owl:NamedIndividual,
+        sekg:EvidenceAvailability ;
+    rdfs:label "NotEstimable"@en ;
+    skos:definition "Hierarchical cohesion cannot be estimated."@en .
+
+sekg:SignificantEvidenceAvailable a owl:NamedIndividual,
+        sekg:EvidenceAvailability ;
+    rdfs:label "SignificantEvidenceAvailable"@en ;
+    skos:definition "At least one statistically significant association."@en .
+
+sekg:TopicConceptScheme a owl:Class ;
+    rdfs:label "Topic concept scheme"@en ;
+    rdfs:subClassOf skos:ConceptScheme ;
+    skos:definition "A SKOS concept scheme organizing topics discovered during a specific topic modeling experiment."@en .
+
+sekg:agreementTopicCount a owl:DatatypeProperty ;
+    rdfs:label "agreementTopicCount"@en ;
+    rdfs:domain sekg:InterRaterAgreementAssessment ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded experimental agreement measurement: agreementTopicCount."@en .
+
+sekg:artifactFilename a owl:DatatypeProperty ;
+    rdfs:label "artifactFilename"@en ;
+    rdfs:domain sekg:ExperimentalArtifact ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the artifactFilename attribute."@en .
+
+sekg:artifactRelativePath a owl:DatatypeProperty ;
+    rdfs:label "artifactRelativePath"@en ;
+    rdfs:domain sekg:ExperimentalArtifact ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the artifactRelativePath attribute."@en .
+
+sekg:artifactSHA256 a owl:DatatypeProperty ;
+    rdfs:label "artifactSHA256"@en ;
+    rdfs:domain sekg:ExperimentalArtifact ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the artifactSHA256 attribute."@en .
+
+sekg:artifactSizeBytes a owl:DatatypeProperty ;
+    rdfs:label "artifactSizeBytes"@en ;
+    rdfs:domain sekg:ExperimentalArtifact ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the artifactSizeBytes attribute."@en .
+
+sekg:assessedBy a owl:ObjectProperty ;
+    rdfs:label "assessed by"@en ;
+    rdfs:domain sekg:HumanCoherenceAssessment ;
+    rdfs:range sekg:HumanEvaluator ;
+    rdfs:subPropertyOf prov:wasAttributedTo ;
+    skos:definition "Identifies the human evaluator responsible for an individual rating."@en .
+
+sekg:assessesGroup a owl:ObjectProperty ;
+    rdfs:label "assesses group"@en ;
+    rdfs:domain sekg:HumanCoherenceAssessment ;
+    rdfs:range sekg:BlindAssessmentGroup ;
+    skos:definition "Identifies the blinded group assessed by a human evaluator."@en .
+
+sekg:automaticAdmission a owl:DatatypeProperty ;
+    rdfs:label "automaticAdmission"@en ;
+    rdfs:domain sekg:OntologyReviewCandidate ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Recorded value for the automaticAdmission attribute."@en .
+
+sekg:backgroundPrevalence a owl:DatatypeProperty ;
+    rdfs:label "backgroundPrevalence"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the backgroundPrevalence attribute."@en .
+
+sekg:blindGroupId a owl:DatatypeProperty ;
+    rdfs:label "blindGroupId"@en ;
+    rdfs:domain sekg:BlindAssessmentGroup ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the blindGroupId attribute."@en .
+
+sekg:candidateForTopic a owl:ObjectProperty ;
+    rdfs:label "candidate for topic"@en ;
+    rdfs:domain sekg:OntologyReviewCandidate ;
+    rdfs:range sekg:DiscoveredTopic ;
+    skos:definition "Identifies the topic associated with an ontology review candidate."@en .
+
+sekg:candidateSourceTerm a owl:ObjectProperty ;
+    rdfs:label "candidate source term"@en ;
+    rdfs:domain sekg:OntologyReviewCandidate ;
+    rdfs:range sekg:MeSHSourceTerm ;
+    skos:definition "Identifies the terminology term proposed for subsequent ontology review."@en .
+
+sekg:caseCount a owl:DatatypeProperty ;
+    rdfs:label "caseCount"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the caseCount attribute."@en .
+
+sekg:ccaTypeCountsJSON a owl:DatatypeProperty ;
+    rdfs:label "ccaTypeCountsJSON"@en ;
+    rdfs:domain sekg:HierarchicalSimilarityAssessment ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the ccaTypeCountsJSON attribute."@en .
+
+sekg:coherenceRating a owl:DatatypeProperty ;
+    rdfs:label "coherenceRating"@en ;
+    rdfs:domain sekg:HumanCoherenceAssessment ;
+    rdfs:range xsd:integer ;
+    skos:definition "Recorded value for the coherenceRating attribute."@en .
+
+sekg:cohesionMax a owl:DatatypeProperty ;
+    rdfs:label "cohesionMax"@en ;
+    rdfs:domain sekg:CohesionMeasurement ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the cohesionMax attribute."@en .
+
+sekg:cohesionMean a owl:DatatypeProperty ;
+    rdfs:label "cohesionMean"@en ;
+    rdfs:domain sekg:CohesionMeasurement ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the cohesionMean attribute."@en .
+
+sekg:cohesionMedian a owl:DatatypeProperty ;
+    rdfs:label "cohesionMedian"@en ;
+    rdfs:domain sekg:CohesionMeasurement ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the cohesionMedian attribute."@en .
+
+sekg:cohesionMin a owl:DatatypeProperty ;
+    rdfs:label "cohesionMin"@en ;
+    rdfs:domain sekg:CohesionMeasurement ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the cohesionMin attribute."@en .
+
+sekg:cohesionStd a owl:DatatypeProperty ;
+    rdfs:label "cohesionStd"@en ;
+    rdfs:domain sekg:CohesionMeasurement ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the cohesionStd attribute."@en .
+
+sekg:conceptPairCount a owl:DatatypeProperty ;
+    rdfs:label "conceptPairCount"@en ;
+    rdfs:domain sekg:TopicCohesionAssessment ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the conceptPairCount attribute."@en .
+
+sekg:configurationDocumentationStatus a owl:DatatypeProperty ;
+    rdfs:label "configuration documentation status"@en ;
+    rdfs:domain sekg:MethodConfiguration ;
+    rdfs:range xsd:string ;
+    skos:definition "Indicates the availability of documentation for an experimental configuration."@en .
+
+sekg:configurationJSON a owl:DatatypeProperty ;
+    rdfs:label "configurationJSON"@en ;
+    rdfs:domain sekg:MethodConfiguration ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the configurationJSON attribute."@en .
+
+sekg:containsExcerpt a owl:ObjectProperty ;
+    rdfs:label "contains excerpt"@en ;
+    rdfs:domain sekg:BlindAssessmentGroup ;
+    rdfs:range sekg:TextExcerpt ;
+    skos:definition "Links a blinded group to a textual excerpt."@en .
+
+sekg:correlationAlternative a owl:DatatypeProperty ;
+    rdfs:label "correlationAlternative"@en ;
+    rdfs:domain sekg:HumanAutomaticCorrelationAssessment ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded experimental correlation attribute: correlationAlternative."@en .
+
+sekg:correlationPValue a owl:DatatypeProperty ;
+    rdfs:label "correlationPValue"@en ;
+    rdfs:domain sekg:HumanAutomaticCorrelationAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental correlation attribute: correlationPValue."@en .
+
+sekg:correlationTopicCount a owl:DatatypeProperty ;
+    rdfs:label "correlationTopicCount"@en ;
+    rdfs:domain sekg:HumanAutomaticCorrelationAssessment ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded experimental correlation attribute: correlationTopicCount."@en .
+
+sekg:documentId a owl:DatatypeProperty ;
+    rdfs:label "documentId"@en ;
+    rdfs:domain sekg:TextExcerpt ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the documentId attribute."@en .
+
+sekg:evaluatorRole a owl:DatatypeProperty ;
+    rdfs:label "evaluatorRole"@en ;
+    rdfs:domain sekg:HumanEvaluator ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the evaluatorRole attribute."@en .
+
+sekg:exactAgreement a owl:DatatypeProperty ;
+    rdfs:label "exactAgreement"@en ;
+    rdfs:domain sekg:PairwiseAgreementAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental agreement measurement: exactAgreement."@en .
+
+sekg:fdrSignificant a owl:DatatypeProperty ;
+    rdfs:label "fdrSignificant"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Recorded value for the fdrSignificant attribute."@en .
+
+sekg:firstEvaluator a owl:ObjectProperty ;
+    rdfs:label "first evaluator"@en ;
+    rdfs:domain sekg:PairwiseAgreementAssessment ;
+    rdfs:range sekg:HumanEvaluator ;
+    skos:definition "Identifies an evaluator in a pairwise agreement assessment."@en .
+
+sekg:firstSourceTerm a owl:ObjectProperty ;
+    rdfs:label "first source term"@en ;
+    rdfs:domain sekg:HierarchicalSimilarityAssessment ;
+    rdfs:range sekg:MeSHSourceTerm ;
+    skos:definition "Identifies one source term in a pair."@en .
+
+sekg:firstTermTreeCount a owl:DatatypeProperty ;
+    rdfs:label "firstTermTreeCount"@en ;
+    rdfs:domain sekg:HierarchicalSimilarityAssessment ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the firstTermTreeCount attribute."@en .
+
+sekg:hasBlindGroup a owl:ObjectProperty ;
+    rdfs:label "has blind group"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:BlindAssessmentGroup ;
+    skos:definition "Links a discovered topic to its blinded group."@en .
+
+sekg:hasCohesionAssessment a owl:ObjectProperty ;
+    rdfs:label "has cohesion assessment"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:TopicCohesionAssessment ;
+    skos:definition "Links a topic to its aggregate cohesion assessment."@en .
+
+sekg:hasCohesionMeasurement a owl:ObjectProperty ;
+    rdfs:label "has cohesion measurement"@en ;
+    rdfs:domain sekg:TopicCohesionAssessment ;
+    rdfs:range sekg:CohesionMeasurement ;
+    skos:definition "Links a cohesion assessment to an aggregate metric result."@en .
+
+sekg:hasCohesionStatus a owl:ObjectProperty ;
+    rdfs:label "has cohesion status"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:EvidenceAvailability ;
+    skos:definition "Indicates whether hierarchical cohesion is estimable."@en .
+
+sekg:hasGrounding a owl:ObjectProperty ;
+    rdfs:label "has grounding"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range sekg:TerminologicalGrounding ;
+    skos:definition "Links a statistical association to its terminological resolution."@en .
+
+sekg:hasHumanAssessment a owl:ObjectProperty ;
+    rdfs:label "has human assessment"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:HumanCoherenceAssessment ;
+    skos:definition "Links a topic to an individual human assessment."@en .
+
+sekg:hasHumanAssessmentStatus a owl:ObjectProperty ;
+    rdfs:label "has human assessment status"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:EvidenceAvailability ;
+    skos:definition "Indicates whether human assessments are available."@en .
+
+sekg:hasHumanSummary a owl:ObjectProperty ;
+    rdfs:label "has human summary"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:HumanAssessmentSummary ;
+    skos:definition "Links a topic to its aggregate human assessment."@en .
+
+sekg:hasMethodConfiguration a owl:ObjectProperty ;
+    rdfs:label "has method configuration"@en ;
+    rdfs:domain sekg:ExperimentalActivity ;
+    rdfs:range sekg:MethodConfiguration ;
+    rdfs:subPropertyOf prov:used ;
+    skos:definition "Links an experimental activity to its documented configuration."@en .
+
+sekg:hasOddsRatioStatus a owl:ObjectProperty ;
+    rdfs:label "has odds ratio status"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range sekg:OddsRatioMeasurementStatus ;
+    skos:definition "Links a statistical association to its controlled odds ratio measurement status."@en .
+
+sekg:hasSCRMapping a owl:ObjectProperty ;
+    rdfs:label "has SCR mapping"@en ;
+    rdfs:domain sekg:SCRGrounding ;
+    rdfs:range sekg:SCRDescriptorMapping ;
+    skos:definition "Links an SCR grounding record to a documented individual descriptor mapping."@en .
+
+sekg:hasSimilarityAssessment a owl:ObjectProperty ;
+    rdfs:label "has similarity assessment"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:HierarchicalSimilarityAssessment ;
+    skos:definition "Links a topic to a pairwise similarity assessment."@en .
+
+sekg:hasSimilarityMeasurement a owl:ObjectProperty ;
+    rdfs:label "has similarity measurement"@en ;
+    rdfs:domain sekg:HierarchicalSimilarityAssessment ;
+    rdfs:range sekg:SimilarityMeasurement ;
+    skos:definition "Links a pairwise assessment to a metric result."@en .
+
+sekg:hasSourceTerm a owl:ObjectProperty ;
+    rdfs:label "has source term"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range sekg:MeSHSourceTerm ;
+    skos:definition "Identifies the source term evaluated by a statistical association."@en .
+
+sekg:hasStatisticalAssociation a owl:ObjectProperty ;
+    rdfs:label "has statistical association"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:StatisticalAssociation ;
+    skos:definition "Links a topic to a statistical association."@en .
+
+sekg:hasStatisticalEvidenceStatus a owl:ObjectProperty ;
+    rdfs:label "has statistical evidence status"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range sekg:EvidenceAvailability ;
+    skos:definition "Indicates whether statistical testing produced at least one significant association. Absence of significance does not imply absence of testing."@en .
+
+sekg:hasTreePosition a owl:ObjectProperty ;
+    rdfs:label "has tree position"@en ;
+    rdfs:domain meshv:Descriptor ;
+    rdfs:range meshv:TreeNumber ;
+    rdfs:subPropertyOf meshv:treeNumber ;
+    skos:definition "Links an official descriptor resource to a MeSH tree position."@en .
+
+sekg:humanRatingRange a owl:DatatypeProperty ;
+    rdfs:label "humanRatingRange"@en ;
+    rdfs:domain sekg:HumanAssessmentSummary ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the humanRatingRange attribute."@en .
+
+sekg:iccAgreementType a owl:DatatypeProperty ;
+    rdfs:label "iccAgreementType"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded experimental agreement measurement: iccAgreementType."@en .
+
+sekg:iccDesign a owl:DatatypeProperty ;
+    rdfs:label "iccDesign"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded experimental agreement measurement: iccDesign."@en .
+
+sekg:iccModel a owl:DatatypeProperty ;
+    rdfs:label "iccModel"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded experimental agreement measurement: iccModel."@en .
+
+sekg:iccRaterCount a owl:DatatypeProperty ;
+    rdfs:label "iccRaterCount"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded experimental agreement measurement: iccRaterCount."@en .
+
+sekg:iccUnit a owl:DatatypeProperty ;
+    rdfs:label "iccUnit"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded experimental agreement measurement: iccUnit."@en .
+
+sekg:iccValue a owl:DatatypeProperty ;
+    rdfs:label "iccValue"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental agreement measurement: iccValue."@en .
+
+sekg:includesEvaluator a owl:ObjectProperty ;
+    rdfs:label "includes evaluator"@en ;
+    rdfs:domain sekg:InterRaterAgreementAssessment ;
+    rdfs:range sekg:HumanEvaluator ;
+    skos:definition "Identifies an evaluator included in an agreement assessment."@en .
+
+sekg:includesTopic a owl:ObjectProperty ;
+    rdfs:label "includes topic"@en ;
+    rdfs:domain sekg:EvidenceRecord ;
+    rdfs:range sekg:DiscoveredTopic ;
+    skos:definition "Identifies a topic included in an aggregate experimental assessment."@en .
+
+sekg:lambdaParameter a owl:DatatypeProperty ;
+    rdfs:label "lambdaParameter"@en ;
+    rdfs:domain sekg:MetricConfiguration ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the lambdaParameter attribute."@en .
+
+sekg:mappingDescriptor a owl:ObjectProperty ;
+    rdfs:label "mapping descriptor"@en ;
+    rdfs:domain sekg:SCRDescriptorMapping ;
+    rdfs:range meshv:Descriptor ;
+    skos:definition "Identifies the official descriptor involved in a mapping."@en .
+
+sekg:mappingSCR a owl:ObjectProperty ;
+    rdfs:label "mapping SCR"@en ;
+    rdfs:domain sekg:SCRDescriptorMapping ;
+    rdfs:range meshv:SupplementaryConceptRecord ;
+    skos:definition "Identifies the official SCR involved in a mapping."@en .
+
+sekg:maximumHumanRating a owl:DatatypeProperty ;
+    rdfs:label "maximumHumanRating"@en ;
+    rdfs:domain sekg:HumanAssessmentSummary ;
+    rdfs:range xsd:integer ;
+    skos:definition "Recorded value for the maximumHumanRating attribute."@en .
+
+sekg:meanAbsoluteDifference a owl:DatatypeProperty ;
+    rdfs:label "meanAbsoluteDifference"@en ;
+    rdfs:domain sekg:PairwiseAgreementAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental agreement measurement: meanAbsoluteDifference."@en .
+
+sekg:meanHumanRating a owl:DatatypeProperty ;
+    rdfs:label "meanHumanRating"@en ;
+    rdfs:domain sekg:HumanAssessmentSummary ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the meanHumanRating attribute."@en .
+
+sekg:meanSquareColumns a owl:DatatypeProperty ;
+    rdfs:label "meanSquareColumns"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental agreement measurement: meanSquareColumns."@en .
+
+sekg:meanSquareError a owl:DatatypeProperty ;
+    rdfs:label "meanSquareError"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental agreement measurement: meanSquareError."@en .
+
+sekg:meanSquareRows a owl:DatatypeProperty ;
+    rdfs:label "meanSquareRows"@en ;
+    rdfs:domain sekg:ICCAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental agreement measurement: meanSquareRows."@en .
+
+sekg:medianHumanRating a owl:DatatypeProperty ;
+    rdfs:label "medianHumanRating"@en ;
+    rdfs:domain sekg:HumanAssessmentSummary ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the medianHumanRating attribute."@en .
+
+sekg:meshRelease a owl:DatatypeProperty ;
+    rdfs:label "meshRelease"@en ;
+    rdfs:domain sekg:TerminologicalGrounding ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the meshRelease attribute."@en .
+
+sekg:methodName a owl:DatatypeProperty ;
+    rdfs:label "methodName"@en ;
+    rdfs:domain sekg:MethodConfiguration ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the methodName attribute."@en .
+
+sekg:metricCode a owl:DatatypeProperty ;
+    rdfs:label "metricCode"@en ;
+    rdfs:domain sekg:MetricConfiguration ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the metricCode attribute."@en .
+
+sekg:minimumHumanRating a owl:DatatypeProperty ;
+    rdfs:label "minimumHumanRating"@en ;
+    rdfs:domain sekg:HumanAssessmentSummary ;
+    rdfs:range xsd:integer ;
+    skos:definition "Recorded value for the minimumHumanRating attribute."@en .
+
+sekg:nonEstimabilityReason a owl:DatatypeProperty ;
+    rdfs:label "nonEstimabilityReason"@en ;
+    rdfs:domain sekg:TopicCohesionAssessment ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the nonEstimabilityReason attribute."@en .
+
+sekg:oddsRatio a owl:DatatypeProperty ;
+    rdfs:label "oddsRatio"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the oddsRatio attribute."@en .
+
+sekg:oddsRatioSourceLexicalValue a owl:DatatypeProperty ;
+    rdfs:label "odds ratio source lexical value"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:string ;
+    skos:definition "Preserves the lexical representation of the odds ratio value or missing-value marker."@en .
+
+sekg:oddsRatioStatus a owl:DatatypeProperty ;
+    rdfs:label "oddsRatioStatus"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:string ;
+    owl:deprecated true ;
+    skos:definition "Recorded value for the oddsRatioStatus attribute."@en .
+
+sekg:originatedFromActivity a owl:ObjectProperty ;
+    rdfs:label "originated from activity"@en ;
+    rdfs:domain sekg:EvidenceRecord ;
+    rdfs:range sekg:OriginalExperimentalActivity ;
+    skos:definition "Identifies the original experimental activity underlying an RDF evidence record."@en .
+
+sekg:pValue a owl:DatatypeProperty ;
+    rdfs:label "pValue"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the pValue attribute."@en .
+
+sekg:preferredMapping a owl:DatatypeProperty ;
+    rdfs:label "preferred mapping"@en ;
+    rdfs:domain sekg:SCRDescriptorMapping ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Indicates whether the source XML marks the descriptor mapping as preferred."@en .
+
+sekg:qValue a owl:DatatypeProperty ;
+    rdfs:label "qValue"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the qValue attribute."@en .
+
+sekg:ratingCount a owl:DatatypeProperty ;
+    rdfs:label "ratingCount"@en ;
+    rdfs:domain sekg:HumanAssessmentSummary ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the ratingCount attribute."@en .
+
+sekg:rawMappingIdentifier a owl:DatatypeProperty ;
+    rdfs:label "raw mapping identifier"@en ;
+    rdfs:domain sekg:SCRDescriptorMapping ;
+    rdfs:range xsd:string ;
+    skos:definition "Preserves the original XML mapping identifier, including its optional asterisk."@en .
+
+sekg:representativeTerms a owl:DatatypeProperty ;
+    rdfs:label "representativeTerms"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the representativeTerms attribute."@en .
+
+sekg:resolvedDescriptor a owl:ObjectProperty ;
+    rdfs:label "resolved descriptor"@en ;
+    rdfs:domain sekg:TerminologicalGrounding ;
+    rdfs:range meshv:Descriptor ;
+    skos:definition "Links a grounding record to an official MeSH descriptor resource."@en .
+
+sekg:resolvedSCR a owl:ObjectProperty ;
+    rdfs:label "resolved SCR"@en ;
+    rdfs:domain sekg:SCRGrounding ;
+    rdfs:range meshv:SupplementaryConceptRecord ;
+    skos:definition "Links an SCR grounding record to its official supplementary concept resource."@en .
+
+sekg:reviewStatus a owl:DatatypeProperty ;
+    rdfs:label "reviewStatus"@en ;
+    rdfs:domain sekg:OntologyReviewCandidate ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the reviewStatus attribute."@en .
+
+sekg:secondEvaluator a owl:ObjectProperty ;
+    rdfs:label "second evaluator"@en ;
+    rdfs:domain sekg:PairwiseAgreementAssessment ;
+    rdfs:range sekg:HumanEvaluator ;
+    skos:definition "Identifies an evaluator in a pairwise agreement assessment."@en .
+
+sekg:secondSourceTerm a owl:ObjectProperty ;
+    rdfs:label "second source term"@en ;
+    rdfs:domain sekg:HierarchicalSimilarityAssessment ;
+    rdfs:range sekg:MeSHSourceTerm ;
+    skos:definition "Identifies the other source term in a pair."@en .
+
+sekg:secondTermTreeCount a owl:DatatypeProperty ;
+    rdfs:label "secondTermTreeCount"@en ;
+    rdfs:domain sekg:HierarchicalSimilarityAssessment ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the secondTermTreeCount attribute."@en .
+
+sekg:significantAssociationCount a owl:DatatypeProperty ;
+    rdfs:label "significantAssociationCount"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the significantAssociationCount attribute."@en .
+
+sekg:similarityValue a owl:DatatypeProperty ;
+    rdfs:label "similarityValue"@en ;
+    rdfs:domain sekg:SimilarityMeasurement ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the similarityValue attribute."@en .
+
+sekg:sourceRecordLocator a owl:DatatypeProperty ;
+    rdfs:label "source record locator"@en ;
+    rdfs:domain sekg:EvidenceRecord ;
+    rdfs:range xsd:string ;
+    skos:definition "A reproducible identifier locating a record within its source experimental artifact."@en .
+
+sekg:sourceTermCount a owl:DatatypeProperty ;
+    rdfs:label "sourceTermCount"@en ;
+    rdfs:domain sekg:TopicCohesionAssessment ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the sourceTermCount attribute."@en .
+
+sekg:sourceTermLabel a owl:DatatypeProperty ;
+    rdfs:label "sourceTermLabel"@en ;
+    rdfs:domain sekg:MeSHSourceTerm ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the sourceTermLabel attribute."@en .
+
+sekg:spearmanRho a owl:DatatypeProperty ;
+    rdfs:label "spearmanRho"@en ;
+    rdfs:domain sekg:HumanAutomaticCorrelationAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental correlation attribute: spearmanRho."@en .
+
+sekg:statisticalTestCount a owl:DatatypeProperty ;
+    rdfs:label "statistical test count"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Number of statistical association tests performed for a discovered topic."@en .
+
+sekg:supportedByEvidence a owl:ObjectProperty ;
+    rdfs:label "supported by evidence"@en ;
+    rdfs:domain sekg:OntologyReviewCandidate ;
+    rdfs:range sekg:EvidenceRecord ;
+    skos:definition "Links a review candidate to its supporting experimental evidence."@en .
+
+sekg:termGlobalArticleCount a owl:DatatypeProperty ;
+    rdfs:label "termGlobalArticleCount"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the termGlobalArticleCount attribute."@en .
+
+sekg:termInBackgroundCount a owl:DatatypeProperty ;
+    rdfs:label "termInBackgroundCount"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the termInBackgroundCount attribute."@en .
+
+sekg:termInTopicCount a owl:DatatypeProperty ;
+    rdfs:label "termInTopicCount"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the termInTopicCount attribute."@en .
+
+sekg:topicArticleCount a owl:DatatypeProperty ;
+    rdfs:label "topicArticleCount"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the topicArticleCount attribute."@en .
+
+sekg:topicId a owl:DatatypeProperty ;
+    rdfs:label "topicId"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range xsd:integer ;
+    skos:definition "Recorded value for the topicId attribute."@en .
+
+sekg:topicPrevalence a owl:DatatypeProperty ;
+    rdfs:label "topicPrevalence"@en ;
+    rdfs:domain sekg:StatisticalAssociation ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded value for the topicPrevalence attribute."@en .
+
+sekg:treeNumber a owl:DatatypeProperty ;
+    rdfs:label "treeNumber"@en ;
+    rdfs:domain meshv:TreeNumber ;
+    rdfs:range xsd:string ;
+    skos:definition "Recorded value for the treeNumber attribute."@en .
+
+sekg:treePairsEvaluated a owl:DatatypeProperty ;
+    rdfs:label "treePairsEvaluated"@en ;
+    rdfs:domain sekg:HierarchicalSimilarityAssessment ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the treePairsEvaluated attribute."@en .
+
+sekg:uniqueArticleCount a owl:DatatypeProperty ;
+    rdfs:label "uniqueArticleCount"@en ;
+    rdfs:domain sekg:DiscoveredTopic ;
+    rdfs:range xsd:nonNegativeInteger ;
+    skos:definition "Recorded value for the uniqueArticleCount attribute."@en .
+
+sekg:usesMetric a owl:ObjectProperty ;
+    rdfs:label "uses metric"@en ;
+    rdfs:domain sekg:EvidenceRecord ;
+    rdfs:range sekg:MetricConfiguration ;
+    skos:definition "Identifies the metric configuration used for a measurement."@en .
+
+sekg:weightedKappa a owl:DatatypeProperty ;
+    rdfs:label "weightedKappa"@en ;
+    rdfs:domain sekg:PairwiseAgreementAssessment ;
+    rdfs:range xsd:double ;
+    skos:definition "Recorded experimental agreement measurement: weightedKappa."@en .
+
+sekg:OriginalExperimentalActivity a owl:Class ;
+    rdfs:label "Original experimental activity"@en ;
+    rdfs:subClassOf sekg:ExperimentalActivity ;
+    owl:disjointWith sekg:RDFIngestionActivity ;
+    skos:definition "An activity that generated the original experimental results before their transformation into RDF."@en .
+
+sekg:PositiveInfiniteOddsRatio a owl:NamedIndividual,
+        sekg:OddsRatioMeasurementStatus ;
+    owl:differentFrom sekg:UndefinedOddsRatio ;
+    skos:definition "The odds ratio is positive infinity."@en .
+
+sekg:RDFIngestionActivity a owl:Class ;
+    rdfs:label "RDF ingestion activity"@en ;
+    rdfs:subClassOf sekg:ExperimentalActivity ;
+    skos:definition "An activity transforming frozen experimental results into RDF evidence records."@en .
+
+sekg:SimilarityMeasurement a owl:Class ;
+    rdfs:label "Similarity measurement"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "A numerical similarity result associated with a metric configuration."@en .
+
+sekg:TextExcerpt a owl:Class ;
+    rdfs:label "Text excerpt"@en ;
+    rdfs:subClassOf prov:Entity ;
+    skos:definition "A textual excerpt used for experimental assessment."@en .
+
+sekg:UndefinedOddsRatio a owl:NamedIndividual,
+        sekg:OddsRatioMeasurementStatus ;
+    skos:definition "The odds ratio is undefined."@en .
+
+sekg:ExperimentalActivity a owl:Class ;
+    rdfs:label "Experimental activity"@en ;
+    rdfs:subClassOf prov:Activity ;
+    skos:definition "A documented experimental process producing or transforming evidence."@en .
+
+sekg:MetricConfiguration a owl:Class ;
+    rdfs:label "Metric configuration"@en ;
+    rdfs:subClassOf prov:Entity ;
+    skos:definition "A documented similarity metric and its parameters."@en .
+
+sekg:SCRGrounding a owl:Class ;
+    rdfs:label "SCR grounding"@en ;
+    rdfs:subClassOf sekg:TerminologicalGrounding ;
+    skos:definition "Resolution through an official MeSH Supplementary Concept Record and its descriptor mappings."@en .
+
+sekg:BlindAssessmentGroup a owl:Class ;
+    rdfs:label "Blind assessment group"@en ;
+    rdfs:subClassOf prov:Entity ;
+    skos:definition "A group of text excerpts presented without disclosing its original topic identifier."@en .
+
+sekg:ExperimentalArtifact a owl:Class ;
+    rdfs:label "Experimental artifact"@en ;
+    rdfs:subClassOf prov:Entity ;
+    skos:definition "A preserved experimental input or output file."@en .
+
+sekg:HumanAutomaticCorrelationAssessment a owl:Class ;
+    rdfs:label "Human-automatic correlation assessment"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "An exploratory correlation assessment between human coherence ratings and automatic hierarchical cohesion measurements."@en .
+
+sekg:HumanCoherenceAssessment a owl:Class ;
+    rdfs:label "Human coherence assessment"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    owl:disjointWith sekg:HierarchicalSimilarityAssessment ;
+    skos:definition "An individual human rating of the perceived semantic coherence of a blinded group of text excerpts."@en .
+
+sekg:InterRaterAgreementAssessment a owl:Class ;
+    rdfs:label "Inter-rater agreement assessment"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "An experimental assessment of agreement among human evaluators."@en .
+
+sekg:MethodConfiguration a owl:Class ;
+    rdfs:label "Method configuration"@en ;
+    rdfs:subClassOf prov:Entity ;
+    skos:definition "A documented methodological configuration."@en .
+
+sekg:OddsRatioMeasurementStatus a owl:Class ;
+    rdfs:label "Odds ratio measurement status"@en ;
+    skos:definition "A controlled status distinguishing finite, infinite and undefined odds ratio values."@en .
+
+sekg:HumanEvaluator a owl:Class ;
+    rdfs:label "Human evaluator"@en ;
+    rdfs:subClassOf prov:Agent ;
+    skos:definition "An anonymized human participant providing expert coherence assessments."@en .
+
+sekg:MeSHSourceTerm a owl:Class ;
+    rdfs:label "MeSH source term"@en ;
+    rdfs:subClassOf prov:Entity ;
+    skos:definition "A source terminology label occurring in the experimental enrichment results."@en .
+
+sekg:OntologyReviewCandidate a owl:Class ;
+    rdfs:label "Ontology review candidate"@en ;
+    rdfs:subClassOf prov:Entity ;
+    skos:definition "An evidence-supported candidate for subsequent ontology review, without automatic class admission."@en .
+
+sekg:PairwiseAgreementAssessment a owl:Class ;
+    rdfs:label "Pairwise agreement assessment"@en ;
+    rdfs:subClassOf sekg:InterRaterAgreementAssessment ;
+    skos:definition "An agreement assessment involving two evaluators."@en .
+
+sekg:SCRDescriptorMapping a owl:Class ;
+    rdfs:label "SCR descriptor mapping"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "An evidence record preserving an official mapping from a MeSH SCR to a MeSH descriptor."@en .
+
+sekg:TerminologicalGrounding a owl:Class ;
+    rdfs:label "Terminological grounding"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "A documented resolution of a source term against an external controlled terminology."@en .
+
+sekg:TopicCohesionAssessment a owl:Class ;
+    rdfs:label "Topic cohesion assessment"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "An aggregate assessment of hierarchical similarity among the enriched source terms of a topic."@en .
+
+sekg:CohesionMeasurement a owl:Class ;
+    rdfs:label "Cohesion measurement"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "An aggregate numerical cohesion result associated with a metric configuration."@en .
+
+sekg:HumanAssessmentSummary a owl:Class ;
+    rdfs:label "Human assessment summary"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "An aggregate description of available individual human coherence ratings."@en .
+
+sekg:EvidenceAvailability a owl:Class ;
+    rdfs:label "Evidence availability"@en ;
+    skos:definition "A controlled status describing the availability or estimability of an evidence dimension."@en .
+
+sekg:HierarchicalSimilarityAssessment a owl:Class ;
+    rdfs:label "Hierarchical similarity assessment"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "A metric-based comparison between two source terms within a discovered topic."@en .
+
+sekg:ICCAssessment a owl:Class ;
+    rdfs:label "Intraclass correlation assessment"@en ;
+    rdfs:subClassOf sekg:InterRaterAgreementAssessment ;
+    skos:definition "An assessment of agreement using an intraclass correlation coefficient."@en .
+
+sekg:StatisticalAssociation a owl:Class ;
+    rdfs:label "Statistical association"@en ;
+    rdfs:subClassOf sekg:EvidenceRecord ;
+    skos:definition "A statistical assessment of the association between a discovered topic and a source terminology term."@en .
+
+sekg:DiscoveredTopic a owl:Class ;
+    rdfs:label "Discovered topic"@en ;
+    rdfs:subClassOf skos:Concept,
+        prov:Entity ;
+    owl:disjointWith sekg:EvidenceRecord ;
+    skos:definition "A thematic cluster identified by a topic modeling procedure, without automatic clinical class status."@en .
+
+sekg:EvidenceRecord a owl:Class ;
+    rdfs:label "Evidence record"@en ;
+    rdfs:subClassOf prov:Entity ;
+    skos:definition "A recorded experimental observation or measurement."@en .
+

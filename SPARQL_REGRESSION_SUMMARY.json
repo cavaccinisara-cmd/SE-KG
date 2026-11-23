@@ -1,0 +1,71 @@
+{
+  "step": "71G.2",
+  "created_at_utc": "2026-11-23T14:59:31.905225+00:00",
+  "original_graph_sha256": "5febcf3c468be022d829025e538339d5f4b458646f7c5b61d450b10e28340d35",
+  "derived_graph_sha256": "49f58dffd6b17414ae56e0767e9198e134d957e5cff2ad7a70d2cb6ffe8790b6",
+  "original_triples": 68543,
+  "derived_triples": 68543,
+  "queries_executed": 8,
+  "queries_passed": 7,
+  "queries_failed": 1,
+  "all_passed": false,
+  "results": [
+    {
+      "query": "CQ01_topic_inventory",
+      "query_sha256": "93fa72608b61f3c0b30360895376e7a03bd9ee6c26ed07d914ab95b66551ab23",
+      "status": "PASS",
+      "original_rows": 19,
+      "derived_rows": 19
+    },
+    {
+      "query": "CQ02_association_summary",
+      "query_sha256": "fbe91f7eb2f0871fc16f0f875046c20af0d122838596b4d4b4eefa62ed969583",
+      "status": "PASS",
+      "original_rows": 1,
+      "derived_rows": 1
+    },
+    {
+      "query": "CQ03_grounding_types",
+      "query_sha256": "63b524558965cf4fcdbf404da875a8bf076db9f10ad3421c57b8ce1608efc78e",
+      "status": "PASS",
+      "original_rows": 2,
+      "derived_rows": 2
+    },
+    {
+      "query": "CQ04_evidence_trace_topic5",
+      "query_sha256": "d168705ec2916008d98517fbf1f4b6f8195b08efe0488dc44f23ebf4b09a35e8",
+      "status": "PASS",
+      "original_rows": 6,
+      "derived_rows": 6
+    },
+    {
+      "query": "CQ05_expert_vs_cohesion",
+      "query_sha256": "0c2cffe4d8d93476c72878efc8da376dc85ff75f9881afacaeb1a10ca3951b80",
+      "status": "PASS",
+      "original_rows": 12,
+      "derived_rows": 12
+    },
+    {
+      "query": "CQ06_candidate_review",
+      "query_sha256": "6f428baeaf06304f4bfac9b08f658a058c9548294cb2f242bac1599b64a9c8bf",
+      "status": "PASS",
+      "original_rows": 1,
+      "derived_rows": 1
+    },
+    {
+      "query": "CQ07_multi_position",
+      "query_sha256": "9c8535fa9d364d7a7d8ec38c37c6db436dd5045ba63e3feadf3ccf2844b5a7a9",
+      "status": "FAIL",
+      "original_rows": 15,
+      "derived_rows": 15
+    },
+    {
+      "query": "CQ08_human_ratings",
+      "query_sha256": "2e95acecc85bd045fa8563fe9f473dc741f5f9a03e44e450826960f6c999408b",
+      "status": "PASS",
+      "original_rows": 36,
+      "derived_rows": 36
+    }
+  ],
+  "public_release_authorized": false
+}

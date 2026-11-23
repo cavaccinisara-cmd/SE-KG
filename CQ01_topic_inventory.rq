@@ -1,0 +1,8 @@
+PREFIX sekg: <https://example.org/sekg/ontology/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX meshv: <http://id.nlm.nih.gov/mesh/vocab#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?topicId ?cases ?status WHERE {
+ ?topic a sekg:DiscoveredTopic; sekg:topicId ?topicId; sekg:caseCount ?cases;
+ sekg:hasStatisticalEvidenceStatus ?status. } ORDER BY ?topicId

@@ -1,0 +1,101 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sek: <https://example.org/sekg/ontology/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+sek:CandidateEvidenceIntegrityShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 2 ;
+            sh:minCount 2 ;
+            sh:nodeKind sh:IRI ;
+            sh:path sek:supportedByEvidence ],
+        [ sh:hasValue "pending_human_review"^^xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:reviewStatus ],
+        [ sh:datatype xsd:boolean ;
+            sh:hasValue false ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path sek:automaticAdmission ] ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "Each candidate must have exactly one association and one grounding." ;
+            sh:select """
+            PREFIX sek: <https://example.org/sekg/ontology/>
+
+            SELECT $this
+            WHERE {
+                {
+                    SELECT $this
+                           (COUNT(DISTINCT ?association) AS ?nAssoc)
+                           (COUNT(DISTINCT ?grounding) AS ?nGround)
+                    WHERE {
+                        OPTIONAL {
+                            $this sek:supportedByEvidence ?association .
+                            ?association a sek:StatisticalAssociation .
+                        }
+                        OPTIONAL {
+                            $this sek:supportedByEvidence ?grounding .
+                            {
+                                ?grounding a sek:DirectDescriptorGrounding .
+                            }
+                            UNION
+                            {
+                                ?grounding a sek:SCRGrounding .
+                            }
+                        }
+                    }
+                    GROUP BY $this
+                }
+                FILTER (?nAssoc != 1 || ?nGround != 1)
+            }
+        """ ],
+        [ a sh:SPARQLConstraint ;
+            sh:message "Candidate topic, source term or grounding is inconsistent." ;
+            sh:select """
+            PREFIX sek: <https://example.org/sekg/ontology/>
+
+            SELECT $this
+            WHERE {
+                $this sek:supportedByEvidence ?association ;
+                      sek:candidateForTopic ?candidateTopic ;
+                      sek:candidateSourceTerm ?candidateTerm .
+
+                ?association a sek:StatisticalAssociation ;
+                             sek:hasSourceTerm ?associationTerm ;
+                             sek:hasGrounding ?grounding .
+
+                FILTER (
+                    ?candidateTerm != ?associationTerm
+                    ||
+                    NOT EXISTS {
+                        ?candidateTopic
+                            sek:hasStatisticalAssociation
+                            ?association .
+                    }
+                    ||
+                    NOT EXISTS {
+                        $this sek:supportedByEvidence ?grounding .
+                    }
+                )
+            }
+        """ ] ;
+    sh:targetClass sek:OntologyReviewCandidate .
+
+sek:DerivedFromIntegrityShape a sh:NodeShape ;
+    sh:property [ sh:class sek:ExperimentalArtifact ;
+            sh:nodeKind sh:IRI ;
+            sh:path prov:wasDerivedFrom ] ;
+    sh:targetSubjectsOf prov:wasDerivedFrom .
+
+sek:GeneratedByIntegrityShape a sh:NodeShape ;
+    sh:property [ sh:class sek:RDFIngestionActivity ;
+            sh:nodeKind sh:IRI ;
+            sh:path prov:wasGeneratedBy ] ;
+    sh:targetSubjectsOf prov:wasGeneratedBy .
+
+sek:OriginalActivityIntegrityShape a sh:NodeShape ;
+    sh:property [ sh:class sek:OriginalExperimentalActivity ;
+            sh:nodeKind sh:IRI ;
+            sh:path sek:originatedFromActivity ] ;
+    sh:targetSubjectsOf sek:originatedFromActivity .
+

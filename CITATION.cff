@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use SE-KG, please cite this resource."
+type: dataset
+title: "SE-KG: A Provenance-Aware Semantic Evidence Knowledge Graph for Biomedical Topic Grounding"
+authors:
+  - family-names: Cavaccini
+    given-names: Sara
+abstract: >-
+  SE-KG is a provenance-aware RDF/OWL knowledge resource
+  supporting biomedical topic grounding, evidence tracing,
+  terminology alignment, semantic similarity analysis,
+  and human evaluation.
+keywords:
+  - knowledge graph
+  - semantic web
+  - biomedical knowledge representation
+  - provenance
+  - RDF
+  - OWL
+  - SHACL
+  - SPARQL

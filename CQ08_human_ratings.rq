@@ -1,0 +1,9 @@
+PREFIX sekg: <https://example.org/sekg/ontology/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX meshv: <http://id.nlm.nih.gov/mesh/vocab#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?topicId ?role ?score WHERE {
+ ?t a sekg:DiscoveredTopic; sekg:topicId ?topicId; sekg:hasHumanAssessment ?r.
+ ?r sekg:assessedBy ?e; sekg:coherenceRating ?score.
+ ?e sekg:evaluatorRole ?role. } ORDER BY ?topicId ?role

@@ -1,0 +1,15 @@
+{
+  "step": "71G.7",
+  "created_at_utc": "2026-11-23T15:03:43.945024+00:00",
+  "query": "CQ07_multi_position",
+  "original_query_sha256": "9c8535fa9d364d7a7d8ec38c37c6db436dd5045ba63e3feadf3ccf2844b5a7a9",
+  "corrected_query_sha256": "040371589af9a7b16ec4584b198816d42533ade45947179a1e2c59907b53164e",
+  "original_ordering": "ORDER BY DESC(?positions) LIMIT 15",
+  "corrected_ordering": "ORDER BY DESC(?positions) ASC(?descriptor) LIMIT 15",
+  "reason": "The original ORDER BY clause did not resolve ties between descriptors with equal hierarchical position counts. A secondary URI ordering was introduced to ensure deterministic LIMIT selection.",
+  "original_graph_rows": 15,
+  "derived_graph_rows": 15,
+  "ordered_results_equivalent": true,
+  "original_query_preserved": true,
+  "public_release_authorized": false
+}
