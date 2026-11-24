@@ -1,0 +1,49 @@
+{
+  "resource": "SE-KG",
+  "timestamp_utc": "2026-11-24T13:04:02.494087+00:00",
+  "graph_triples": 68543,
+  "shacl": {
+    "structural": {
+      "conforms": true,
+      "report_triples": 2
+    },
+    "advanced": {
+      "conforms": true,
+      "report_triples": 2
+    }
+  },
+  "sparql": {
+    "CQ01_topic_inventory": {
+      "result_type": "SELECT",
+      "rows": 19
+    },
+    "CQ02_association_summary": {
+      "result_type": "SELECT",
+      "rows": 1
+    },
+    "CQ03_grounding_types": {
+      "result_type": "SELECT",
+      "rows": 2
+    },
+    "CQ04_evidence_trace_topic5": {
+      "result_type": "SELECT",
+      "rows": 6
+    },
+    "CQ05_expert_vs_cohesion": {
+      "result_type": "SELECT",
+      "rows": 12
+    },
+    "CQ06_candidate_review": {
+      "result_type": "SELECT",
+      "rows": 1
+    },
+    "CQ07_multi_position": {
+      "result_type": "SELECT",
+      "rows": 15
+    },
+    "CQ08_human_ratings": {
+      "result_type": "SELECT",
+      "rows": 36
+    }
+  }
+}

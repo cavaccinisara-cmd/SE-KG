@@ -1,86 +1,52 @@
-# SE-KG Reproducibility Guide
+# SE-KG Reproducibility Guide — v1.0.1 candidate
 
-## Overview
+## Available artifacts
 
-This repository provides the SE-KG ontology schema,
-SHACL validation shapes, SPARQL competency queries,
-and a validation script.
-
-The full RDF data graph is not included in the
-pre-release repository while redistribution and
-privacy checks remain pending.
+The repository root includes `SE-KG_PUBLIC_CANDIDATE.nt` (68,543 triples),
+`sekg_ontology.ttl`, `sekg_shapes.ttl`, `sekg_evidence_provenance_shapes.ttl`,
+eight `CQ*.rq` competency queries, and `validate_resource.py`.
 
 ## Requirements
 
-- Python 3.10 or newer
-- Dependencies listed in `requirements.txt`
-- An RDF graph compatible with the SE-KG ontology
+Python 3.10+; pinned dependencies in `requirements.txt`.
 
-## Installation
+## Installation and validation
 
-From the repository root:
+Run from the repository root:
 
-    python -m pip install -r requirements.txt
+```bash
+python3 -m pip install -r requirements.txt
+python3 validate_resource.py --graph SE-KG_PUBLIC_CANDIDATE.nt --output validation_results_v1.0.1.json
+```
 
-## Running validation
+The script loads the N-Triples graph, performs structural and advanced
+SHACL validation, executes eight SPARQL SELECT queries, and saves a JSON report.
 
-Execute:
+## Observed validation on 24 November 2026
 
-    python scripts/validate_resource.py \
-        --graph /path/to/SEKG_GRAPH.nt \
-        --output validation_results.json
+The user executed the commands locally on macOS. The archived report
+`validation_results_v1.0.1.json` records:
 
-The graph path must point to a locally available
-RDF file. The example path is a placeholder.
+| Check | Result |
+|---|---|
+| RDF graph | 68,543 triples |
+| Structural SHACL | `conforms: true` |
+| Advanced SHACL | `conforms: true` |
+| CQ01–CQ08 | all executed; 19, 1, 2, 6, 12, 1, 15, 36 result rows |
 
-## Validation procedure
+The user also loaded `sekg_ontology.ttl` into Protégé, ran HermiT,
+and confirmed consistency and no inferred named subclasses of `owl:Nothing`.
+These reasoner observations are not recorded in the JSON script report.
 
-The script:
+## Interpretation and limitations
 
-1. Loads the supplied RDF graph.
-2. Executes structural SHACL validation.
-3. Executes advanced SHACL validation.
-4. Runs eight SPARQL competency queries.
-5. Saves a JSON execution report.
-
-## Verified pre-release test
-
-The validation script was executed against a
-sanitized SE-KG candidate containing 68,543 triples.
-
-Observed results:
-
-- Structural SHACL: conformant.
-- Advanced SHACL: conformant.
-- SPARQL competency queries: 8 executed successfully.
-
-These results apply to the tested candidate graph
-and do not establish that arbitrary RDF inputs
-will conform.
-
-## Interpretation
-
-SHACL conformance verifies satisfaction of the
-implemented constraints. It does not establish
-complete biomedical correctness.
-
-Successful SPARQL execution demonstrates that the
-queries run without errors. It does not, by itself,
-establish equivalence with reference query results.
-
-## Deterministic query ordering
-
-CQ07 uses an explicit secondary ordering key to
-resolve ties at the LIMIT boundary.
-
-The repository retains documentation of the
-original ordering discrepancy and its correction.
-
-## Resource availability
-
-The ontology schema, SHACL shapes, SPARQL queries,
-and validation script can be inspected independently
-of the full RDF data graph.
-
-Publication of the data graph remains subject to
-final provenance, privacy, and redistribution review.
+- SHACL conformance applies to the tested graph and the supplied shapes.
+- Query execution does not prove that every returned binding is correct.
+- HermiT consistency applies to the ontology loaded in Protégé, not necessarily
+  to the complete RDF instance graph.
+- CQ07 has a deterministic tie-breaking correction; pre-migration
+  reports are preserved for historical comparison.
+- The graph is publicly distributed as a research resource, not a clinical
+  decision-support system. Reuse is subject to `DATA_LICENSE.md`.
+- The namespace `https://w3id.org/sekg/` is used in the files; its HTTP
+  dereferencing must be checked after the w3id PR is merged.

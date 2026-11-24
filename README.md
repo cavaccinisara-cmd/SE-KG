@@ -2,9 +2,8 @@
 
 **A provenance-aware RDF/OWL resource for biomedical topic grounding**
 
-> **Release status:** v1.0.1 migration CANDIDATE (not yet published).
-> The RDF graph is included in this candidate archive. The w3id namespace
-> is pending upstream PR approval; revalidate and review redistribution rights before publishing.
+> **Release status:** v1.0.1 candidate, validated locally on 24 November 2026; GitHub release and Zenodo DOI for v1.0.1 not yet issued.
+> Namespace adopted in the files: `https://w3id.org/sekg/`. Web resolution depends on completion of the w3id registration. Redistribution rights must be reviewed before release.
 
 ## Overview
 
@@ -61,54 +60,37 @@ redistributable.
 
 ## Repository Structure
 
-- `data/`: Approved RDF distribution (pending).
-- `ontology/`: Ontology schema (pending packaging).
-- `validation/shacl/`: Structural and advanced SHACL shapes.
-- `validation/sparql/`: Eight competency queries.
-- `validation/reports/`: Validation and regression reports.
-- `provenance/`: Provenance documentation (pending).
-- `scripts/`: Reproducibility scripts (pending).
-- `docs/`: Technical documentation (pending).
-- `examples/`: Usage examples (pending).
-- `ARTIFACT_MANIFEST.json`: SHA-256 checksums.
+The current repository places the distributable artifacts in its root directory:
 
-Some directories are intentionally empty during
-pre-publication preparation.
+- `SE-KG_PUBLIC_CANDIDATE.nt`: RDF graph (68,543 triples).
+- `sekg_ontology.ttl`: OWL ontology schema.
+- `sekg_shapes.ttl` and `sekg_evidence_provenance_shapes.ttl`: SHACL constraints.
+- `CQ01_*.rq` through `CQ08_*.rq`: SPARQL competency queries.
+- `validate_resource.py` and `requirements.txt`: local validation tooling.
+- `validation_results_v1.0.1.json`: validation execution report (24 November 2026).
+- `MIGRATION_VALIDATION.json` and `PRE_MIGRATION_*`: migration and historical reports.
+- `DATA_LICENSE.md`, `REPRODUCIBILITY.md`, `RELEASE_CHECKLIST.md`: documentation.
 
-## Validation
+## Validation (v1.0.1 candidate)
 
-### SHACL
+On 24 November 2026, the locally executed `validate_resource.py` script
+reported **68,543 RDF triples**, **SHACL structural conformance** and
+**SHACL advanced conformance**. All eight SPARQL competency queries executed
+successfully. Their SELECT result-row counts were, respectively,
+**19, 1, 2, 6, 12, 1, 15, and 36**. The machine-readable execution
+report is `validation_results_v1.0.1.json`.
 
-The sanitized RDF candidate was checked against:
+HermiT was run in Protégé on `sekg_ontology.ttl`; the user observed
+**logical consistency** and **no named classes under `owl:Nothing`** in
+the inferred class hierarchy. This is a manually reported check, not an
+automatically archived reasoner log. The version of Protégé/HermiT and
+reasoner settings should be recorded for publication-grade reproducibility.
 
-- Structural SHACL constraints.
-- Advanced evidence and provenance constraints.
+SHACL conformance checks the implemented constraints; successful SPARQL
+execution does not by itself verify the correctness of every returned value.
 
-Both validation runs reported conformance without violations
-for the tested candidate graph.
-
-Validation shapes and reports are available under
-`validation/shacl/` and `validation/reports/`.
-
-### SPARQL Competency Queries
-
-Eight competency queries are provided in
-`validation/sparql/`.
-
-They cover topic inventory, association summaries,
-terminology grounding, evidence tracing, human evaluation,
-candidate review, hierarchical positioning, and ratings.
-
-An initial regression comparison identified a difference
-in CQ07 caused by an underspecified ordering at a tied
-ranking boundary.
-
-A deterministic secondary ordering was subsequently added.
-The corrected CQ07 produced matching results across the
-original and sanitized RDF graphs.
-
-Both the initial regression report and the correction
-record are preserved for transparency.
+CQ07 includes a deterministic tie-breaking correction. Historical
+pre-migration reports must not be confused with v1.0.1 validation evidence.
 
 ## Provenance and Review Status
 
@@ -124,34 +106,32 @@ expert acceptance.
 
 ## Data Availability
 
-The complete RDF graph is currently withheld from this
-repository snapshot.
+The RDF graph `SE-KG_PUBLIC_CANDIDATE.nt` is included in the repository
+snapshot and can be downloaded with the ontology, shapes and queries.
+The existing **v1.0.0** Zenodo version DOI is `10.5281/zenodo.24498384`.
+Do **not** cite that DOI as a DOI for v1.0.1: a new version DOI is expected
+only after the v1.0.1 release is archived.
 
-A sanitized candidate has been prepared and subjected to
-structural and query-regression checks.
-
-Final review of metadata, source-data redistribution
-conditions, and publication permissions remains pending.
-
-A v1.0.0 release has a Zenodo version DOI (10.5281/zenodo.24498384).
-This v1.0.1 candidate has not been released or assigned a new version DOI.
+The SE-KG namespace in these artifacts is `https://w3id.org/sekg/`.
+Its public HTTP resolution is not yet verified; w3id registration is
+tracked in upstream PR #7281. This does not prevent access to the files
+through GitHub or the existing Zenodo archive.
 
 ## Reproducibility
 
-The repository currently provides:
+Install dependencies and run validation from the repository root:
 
-- SHACL validation shapes.
-- SPARQL competency queries.
-- Validation reports.
-- SHA-256 artifact manifest.
+```bash
+python3 -m pip install -r requirements.txt
+python3 validate_resource.py --graph SE-KG_PUBLIC_CANDIDATE.nt --output validation_results_v1.0.1.json
+```
 
-Executable instructions and the final approved resource
-distribution will be added before public release.
+See `REPRODUCIBILITY.md` for interpretation and validation scope.
 
 ## Citation
 
-Citation metadata will be provided once the associated
-publication and repository release details are finalized.
+Use `CITATION.cff` for resource metadata. Cite the specific published
+release DOI once the v1.0.1 archive is available.
 
 ## License
 
@@ -169,6 +149,6 @@ Redistribution conditions must be verified before release.
 The local SE-KG namespace was changed from `https://example.org/sekg/` to
 `https://w3id.org/sekg/` across RDF, OWL, SHACL and competency queries.
 The persistent namespace is **not active until w3id PR #7281 is merged**.
-Pre-migration validation reports are retained with `PRE_MIGRATION_` filenames
-and do **not** establish SHACL/SPARQL conformity of this new version.
+Pre-migration validation reports are retained with `PRE_MIGRATION_` filenames;
+`validation_results_v1.0.1.json` records the new candidate validation.
 See `MIGRATION_VALIDATION.json` and `RELEASE_CHECKLIST.md`.
