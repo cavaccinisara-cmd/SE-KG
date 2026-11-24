@@ -1,0 +1,75 @@
+{
+  "candidate_version": "v1.0.1",
+  "status": "candidate_not_published",
+  "old_namespace": "https://example.org/sekg/",
+  "new_namespace": "https://w3id.org/sekg/",
+  "w3id_pr": "https://github.com/perma-id/w3id.org/pull/7281",
+  "files_updated": [
+    "sekg_ontology.ttl",
+    "CQ04_evidence_trace_topic5.rq",
+    "sekg_evidence_provenance_shapes.ttl",
+    "CQ07_multi_position.rq",
+    "CQ05_expert_vs_cohesion.rq",
+    "CQ01_topic_inventory.rq",
+    "CQ02_association_summary.rq",
+    "sekg_shapes.ttl",
+    "CQ03_grounding_types.rq",
+    "CQ06_candidate_review.rq",
+    "CQ08_human_ratings.rq",
+    "SE-KG_PUBLIC_CANDIDATE.nt"
+  ],
+  "checks": {
+    "rdf_parse_triples": 68543,
+    "rdf_triples_expected": true,
+    "sekg_ontology.ttl_parse_triples": 723,
+    "sekg_shapes.ttl_parse_triples": 124,
+    "sekg_evidence_provenance_shapes.ttl_parse_triples": 44,
+    "old_namespace_occurrences_in_rdf": 0,
+    "CQ01_topic_inventory.rq": {
+      "status": "pass",
+      "type": "SELECT",
+      "rows": 19
+    },
+    "CQ02_association_summary.rq": {
+      "status": "pass",
+      "type": "SELECT",
+      "rows": 1
+    },
+    "CQ03_grounding_types.rq": {
+      "status": "pass",
+      "type": "SELECT",
+      "rows": 2
+    },
+    "CQ04_evidence_trace_topic5.rq": {
+      "status": "pass",
+      "type": "SELECT",
+      "rows": 6
+    },
+    "CQ05_expert_vs_cohesion.rq": {
+      "status": "pass",
+      "type": "SELECT",
+      "rows": 12
+    },
+    "CQ06_candidate_review.rq": {
+      "status": "pass",
+      "type": "SELECT",
+      "rows": 1
+    },
+    "CQ07_multi_position.rq": {
+      "status": "pass",
+      "type": "SELECT",
+      "rows": 15
+    },
+    "CQ08_human_ratings.rq": {
+      "status": "pass",
+      "type": "SELECT",
+      "rows": 36
+    }
+  },
+  "limitations": [
+    "SHACL was not rerun: pyshacl unavailable in this runtime.",
+    "HermiT logical consistency must be rerun in Protege.",
+    "w3id PR is pending; do not claim active dereferenceability.",
+    "Source-data redistribution permissions and licenses require author review."
+  ]
+}

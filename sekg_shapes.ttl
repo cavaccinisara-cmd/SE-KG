@@ -1,4 +1,4 @@
-@prefix sek: <https://example.org/sekg/ontology/> .
+@prefix sek: <https://w3id.org/sekg/ontology/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 

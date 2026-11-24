@@ -1,0 +1,20 @@
+{
+  "step": "71F",
+  "created_at_utc": "2026-11-23T14:57:38.647316+00:00",
+  "graph_file": "SE-KG_PUBLIC_CANDIDATE.nt",
+  "graph_sha256": "49f58dffd6b17414ae56e0767e9198e134d957e5cff2ad7a70d2cb6ffe8790b6",
+  "graph_triples": 68543,
+  "structural": {
+    "conforms": true,
+    "validation_results": 0,
+    "shapes_sha256": "07c1d6be63ac555d6d2efd32bf34282ed577e97df747fef297fa5bb53cc011a4",
+    "report_file": "SHACL_STRUCTURAL_REPORT.ttl"
+  },
+  "advanced": {
+    "conforms": true,
+    "validation_results": 0,
+    "shapes_sha256": "1a99f467e51b0467b68cdab15cb19088d61b88214c6c0c560249078c9a50c158",
+    "report_file": "SHACL_ADVANCED_REPORT.ttl"
+  },
+  "public_release_authorized": false
+}

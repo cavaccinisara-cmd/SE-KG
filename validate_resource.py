@@ -49,7 +49,7 @@ def main():
 
     args = parser.parse_args()
 
-    repository = Path(__file__).resolve().parents[1]
+    repository = Path(__file__).resolve().parent
     graph_path = Path(args.graph).resolve()
 
     if not graph_path.is_file():
@@ -71,12 +71,11 @@ def main():
     shape_files = {
         "structural": (
             repository
-            / "validation/shacl/sekg_shapes.ttl"
+            / "sekg_shapes.ttl"
         ),
         "advanced": (
             repository
-            / "validation/shacl/"
-            "sekg_evidence_provenance_shapes.ttl"
+            / "sekg_evidence_provenance_shapes.ttl"
         ),
     }
 
@@ -86,7 +85,7 @@ def main():
         )
 
     query_directory = (
-        repository / "validation/sparql"
+        repository
     )
 
     queries = sorted(

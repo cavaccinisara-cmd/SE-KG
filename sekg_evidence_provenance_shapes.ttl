@@ -1,5 +1,5 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix sek: <https://example.org/sekg/ontology/> .
+@prefix sek: <https://w3id.org/sekg/ontology/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -20,7 +20,7 @@ sek:CandidateEvidenceIntegrityShape a sh:NodeShape ;
     sh:sparql [ a sh:SPARQLConstraint ;
             sh:message "Each candidate must have exactly one association and one grounding." ;
             sh:select """
-            PREFIX sek: <https://example.org/sekg/ontology/>
+            PREFIX sek: <https://w3id.org/sekg/ontology/>
 
             SELECT $this
             WHERE {
@@ -52,7 +52,7 @@ sek:CandidateEvidenceIntegrityShape a sh:NodeShape ;
         [ a sh:SPARQLConstraint ;
             sh:message "Candidate topic, source term or grounding is inconsistent." ;
             sh:select """
-            PREFIX sek: <https://example.org/sekg/ontology/>
+            PREFIX sek: <https://w3id.org/sekg/ontology/>
 
             SELECT $this
             WHERE {

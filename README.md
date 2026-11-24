@@ -2,10 +2,9 @@
 
 **A provenance-aware RDF/OWL resource for biomedical topic grounding**
 
-> **Release status:** Pre-publication repository candidate.
-> The complete RDF knowledge graph is not included in this
-> repository snapshot pending final metadata, privacy, and
-> redistribution-rights review.
+> **Release status:** v1.0.1 migration CANDIDATE (not yet published).
+> The RDF graph is included in this candidate archive. The w3id namespace
+> is pending upstream PR approval; revalidate and review redistribution rights before publishing.
 
 ## Overview
 
@@ -134,8 +133,8 @@ structural and query-regression checks.
 Final review of metadata, source-data redistribution
 conditions, and publication permissions remains pending.
 
-No public dataset release, persistent identifier, or
-redistribution license is claimed at this stage.
+A v1.0.0 release has a Zenodo version DOI (10.5281/zenodo.24498384).
+This v1.0.1 candidate has not been released or assigned a new version DOI.
 
 ## Reproducibility
 
@@ -156,10 +155,20 @@ publication and repository release details are finalized.
 
 ## License
 
-**License pending.**
+**Check DATA_LICENSE.md for dataset-specific terms.**
 
 No license is granted for underlying biomedical source
 records or terminology data by the presence of this
 pre-publication repository snapshot.
 
 Redistribution conditions must be verified before release.
+
+
+## Namespace migration candidate (v1.0.1)
+
+The local SE-KG namespace was changed from `https://example.org/sekg/` to
+`https://w3id.org/sekg/` across RDF, OWL, SHACL and competency queries.
+The persistent namespace is **not active until w3id PR #7281 is merged**.
+Pre-migration validation reports are retained with `PRE_MIGRATION_` filenames
+and do **not** establish SHACL/SPARQL conformity of this new version.
+See `MIGRATION_VALIDATION.json` and `RELEASE_CHECKLIST.md`.

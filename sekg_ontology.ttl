@@ -3,11 +3,11 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sekg: <https://example.org/sekg/ontology/> .
+@prefix sekg: <https://w3id.org/sekg/ontology/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://example.org/sekg/ontology> a owl:Ontology ;
+<https://w3id.org/sekg/ontology> a owl:Ontology ;
     rdfs:label "Semantic Evidence Knowledge Graph Ontology"@en ;
     dcterms:description "An ontology for provenance-aware representation of statistical, terminological, hierarchical and human evidence supporting topic-guided biomedical knowledge engineering."@en ;
     owl:priorVersion sekg:0.1.0 ;
